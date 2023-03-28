@@ -1,0 +1,43 @@
+//使用proto3语法
+syntax = "proto3";
+
+//生成多个类
+option java_multiple_files = false;
+
+//生成java类所在的包
+option java_package = "cn.feng.news.proto";
+
+//生成外层类类名
+option java_outer_classname = "NewsProto";
+
+//.proto包名
+package news;
+
+/*
+接下来，定义RPC服务RouteGuide
+*/
+service NewsService{
+  //list是方法名，NewsRequest代表传入参数，NewsResponse代表返回响应
+  rpc list(NewsRequest) returns (NewsResponse){}
+}
+
+message NewsRequest{
+  string date = 1;
+}
+
+message NewsResponse{
+  //repeated说明是一个集合（数组），数组每一个元素都是News对象
+  repeated News news = 1;
+}
+
+//News新闻实体对象
+message News{
+  //对应java的int
+  int32 id = 1;
+  //新闻标题
+  string title = 2;
+  //新闻内容
+  string content = 3;
+  //对应java的long
+  int64 createTime = 4;
+}

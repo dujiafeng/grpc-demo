@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = false;
+option java_package = "cn.feng.news.proto";
+option java_outer_classname = "SmsProto";
+package sms;
+service SmsService{
+  rpc sendSms(SmsRequest) returns (stream SmsResponse) {}
+  rpc createPhone(stream PhoneNumberRequest) returns (PhoneNumberResponse) {}
+  rpc createPhoneAndSend(stream PhoneNumberRequest) returns (stream PhoneNumberResponse) {}
+}
+message SmsRequest{
+  repeated string phoneNumber = 10;
+  string content = 20;
+}
+message SmsResponse{
+  string result = 1;
+}
+message PhoneNumberRequest{
+  string phoneNumber = 1;
+}
+message PhoneNumberResponse{
+  string result = 1;
+}
